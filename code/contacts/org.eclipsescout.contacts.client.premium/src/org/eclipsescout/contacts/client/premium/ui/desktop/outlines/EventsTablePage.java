@@ -89,13 +89,6 @@ public class EventsTablePage extends AbstractPageWithTable<EventsTablePage.Table
       return getColumnSet().getColumnByClass(CountryColumn.class);
     }
 
-    /**
-     * @return the HomepageColumn
-     */
-    public HomepageColumn getHomepageColumn() {
-      return getColumnSet().getColumnByClass(HomepageColumn.class);
-    }
-
     @Override
     protected String getConfiguredDefaultIconId() {
       return Icons.Event;
@@ -111,6 +104,13 @@ public class EventsTablePage extends AbstractPageWithTable<EventsTablePage.Table
      */
     public ParticipantsColumn getParticipantsColumn() {
       return getColumnSet().getColumnByClass(ParticipantsColumn.class);
+    }
+
+    /**
+     * @return the HomepageColumn
+     */
+    public HomepageColumn getHomepageColumn() {
+      return getColumnSet().getColumnByClass(EventsTablePage.Table.HomepageColumn.class);
     }
 
     /**
@@ -213,16 +213,7 @@ public class EventsTablePage extends AbstractPageWithTable<EventsTablePage.Table
       }
     }
 
-    @Order(6500.0)
-    public class ParticipantsColumn extends AbstractIntegerColumn {
-
-      @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("Participants");
-      }
-    }
-
-    @Order(7000.0)
+    @Order(6250.0)
     public class HomepageColumn extends AbstractStringColumn {
 
       @Override
@@ -231,8 +222,27 @@ public class EventsTablePage extends AbstractPageWithTable<EventsTablePage.Table
       }
 
       @Override
+      protected boolean getConfiguredVisible() {
+        return false;
+      }
+
+      @Override
       protected int getConfiguredWidth() {
         return 250;
+      }
+    }
+
+    @Order(6500.0)
+    public class ParticipantsColumn extends AbstractIntegerColumn {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("Participants");
+      }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 120;
       }
     }
 

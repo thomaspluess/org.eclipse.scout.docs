@@ -67,16 +67,16 @@ public class EventsTablePageData extends AbstractTablePageData {
     public static final String ends = "ends";
     public static final String city = "city";
     public static final String country = "country";
-    public static final String participants = "participants";
     public static final String homepage = "homepage";
+    public static final String participants = "participants";
     private String m_eventId;
     private String m_title;
     private Date m_starts;
     private Date m_ends;
     private String m_city;
     private String m_country;
-    private Integer m_participants;
     private String m_homepage;
+    private Integer m_participants;
 
     public EventsTableRowData() {
     }
@@ -172,21 +172,6 @@ public class EventsTablePageData extends AbstractTablePageData {
     }
 
     /**
-     * @return the Participants
-     */
-    public Integer getParticipants() {
-      return m_participants;
-    }
-
-    /**
-     * @param participants
-     *          the Participants to set
-     */
-    public void setParticipants(Integer participants) {
-      m_participants = participants;
-    }
-
-    /**
      * @return the Homepage
      */
     public String getHomepage() {
@@ -199,6 +184,21 @@ public class EventsTablePageData extends AbstractTablePageData {
      */
     public void setHomepage(String homepage) {
       m_homepage = homepage;
+    }
+
+    /**
+     * @return the Participants
+     */
+    public Integer getParticipants() {
+      return m_participants;
+    }
+
+    /**
+     * @param participants
+     *          the Participants to set
+     */
+    public void setParticipants(Integer participants) {
+      m_participants = participants;
     }
   }
 }

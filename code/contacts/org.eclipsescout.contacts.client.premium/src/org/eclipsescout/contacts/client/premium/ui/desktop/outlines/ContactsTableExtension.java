@@ -32,6 +32,11 @@ public class ContactsTableExtension extends AbstractTableExtension<ContactsTable
     protected String getConfiguredHeaderText() {
       return TEXTS.get("Events");
     }
+
+    @Override
+    protected int getConfiguredWidth() {
+      return 100;
+    }
   }
 
 }

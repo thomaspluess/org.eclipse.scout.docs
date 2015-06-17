@@ -152,7 +152,7 @@ public class ContactsTablePage extends AbstractExtensiblePageWithTable<Table> {
       }
     }
 
-    @Order(5000.0)
+    @Order(4000.0)
     public class CityColumn extends AbstractStringColumn {
 
       @Override
@@ -166,7 +166,7 @@ public class ContactsTablePage extends AbstractExtensiblePageWithTable<Table> {
       }
     }
 
-    @Order(6000.0)
+    @Order(5000.0)
     public class CountryColumn extends AbstractStringColumn {
 
       @Override
@@ -175,12 +175,36 @@ public class ContactsTablePage extends AbstractExtensiblePageWithTable<Table> {
       }
     }
 
-    @Order(7000.0)
+    @Order(6000.0)
     public class PhoneColumn extends AbstractStringColumn {
 
       @Override
       protected String getConfiguredHeaderText() {
         return TEXTS.get("Phone");
+      }
+
+      @Override
+      protected boolean getConfiguredVisible() {
+        return false;
+      }
+
+      @Override
+      protected int getConfiguredWidth() {
+        return 120;
+      }
+    }
+
+    @Order(7000.0)
+    public class MobileColumn extends AbstractStringColumn {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("Mobile");
+      }
+
+      @Override
+      protected boolean getConfiguredVisible() {
+        return false;
       }
 
       @Override
@@ -190,20 +214,6 @@ public class ContactsTablePage extends AbstractExtensiblePageWithTable<Table> {
     }
 
     @Order(8000.0)
-    public class MobileColumn extends AbstractStringColumn {
-
-      @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("Mobile");
-      }
-
-      @Override
-      protected int getConfiguredWidth() {
-        return 120;
-      }
-    }
-
-    @Order(9000.0)
     public class EmailColumn extends AbstractStringColumn {
 
       @Override
@@ -212,12 +222,17 @@ public class ContactsTablePage extends AbstractExtensiblePageWithTable<Table> {
       }
 
       @Override
+      protected boolean getConfiguredVisible() {
+        return false;
+      }
+
+      @Override
       protected int getConfiguredWidth() {
         return 200;
       }
     }
 
-    @Order(10000.0)
+    @Order(9000.0)
     public class CompanyColumn extends AbstractSmartColumn<String> {
 
       @Override

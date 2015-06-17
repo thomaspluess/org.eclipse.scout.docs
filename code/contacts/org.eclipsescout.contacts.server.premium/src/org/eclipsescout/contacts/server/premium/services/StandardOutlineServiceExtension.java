@@ -30,26 +30,21 @@ public class StandardOutlineServiceExtension extends StandardOutlineService {
   }
 
   private void addEventCounts(ContactsTablePageData pageData) throws ProcessingException {
+    // get event counts
     // background info: https://www.eclipse.org/forums/index.php/t/310526/
-    BeanArrayHolder<EventCounterBean> arrayHolder = new BeanArrayHolder<EventCounterBean>(EventCounterBean.class);
+    BeanArrayHolder<EventCounterBean> arrayHolder = new BeanArrayHolder<>(EventCounterBean.class);
     SQL.selectInto(TEXTS.get("SqlContactPageEventCounts"), new NVPair("h", arrayHolder));
 
-    // create map: contactId -> events
+    // create map for event counts
     HashMap<String, Long> eventCounts = new HashMap<>();
     for (EventCounterBean counter : arrayHolder.getBeans()) {
       eventCounts.put(counter.getContactId(), counter.getEvents());
     }
 
-    // copy event counts into target rows
+    // add event counts to page data rows
     for (ContactsTableRowData row : pageData.getRows()) {
-      String contactId = row.getContactId();
-
-      if (eventCounts.containsKey(contactId)) {
-        row.getContribution(ContactsTableDataExtension.class).setEvents(eventCounts.get(contactId));
-      }
-      else {
-        row.getContribution(ContactsTableDataExtension.class).setEvents(Long.valueOf(0));
-      }
+      long events = eventCounts.getOrDefault(row.getContactId(), 0L);
+      row.getContribution(ContactsTableDataExtension.class).setEvents(events);
     }
   }
 }
