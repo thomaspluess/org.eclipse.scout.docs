@@ -47,13 +47,13 @@ public class ClientSession extends AbstractClientSession {
 
   @Override
   protected void execLoadSession() throws ProcessingException {
-    setServiceTunnel(new ClientHttpServiceTunnel(this));
+    setServiceTunnel(new ClientHttpServiceTunnel());
 
     //pre-load all known code types
     CODES.getAllCodeTypes("org.eclipsescout.demo.bahbah.shared");
 
     // turn client notification polling on
-    getServiceTunnel().setClientNotificationPollInterval(1000L);
+//    getServiceTunnel().setClientNotificationPollInterval(1000L);
 
     // set the notification listener service (this service will be called when the client receives a notification)
     IBahBahNotificationConsumerService notificationHandlerService = BEANS.get(IBahBahNotificationConsumerService.class);
@@ -65,7 +65,7 @@ public class ClientSession extends AbstractClientSession {
   @Override
   protected void execStoreSession() throws ProcessingException {
     // disable notification polling with -1
-    ClientSession.get().getServiceTunnel().setClientNotificationPollInterval(-1);
+//    ClientSession.get().getServiceTunnel().setClientNotificationPollInterval(-1);
     BEANS.get(IUserProcessService.class).unregisterUser();
   }
 
