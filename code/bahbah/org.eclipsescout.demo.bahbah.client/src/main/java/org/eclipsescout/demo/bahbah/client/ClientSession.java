@@ -16,7 +16,6 @@ import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.services.common.clientnotification.IClientNotificationConsumerService;
-import org.eclipse.scout.rt.client.servicetunnel.http.ClientHttpServiceTunnel;
 import org.eclipse.scout.rt.client.session.ClientSessionProvider;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
@@ -47,7 +46,6 @@ public class ClientSession extends AbstractClientSession {
 
   @Override
   protected void execLoadSession() throws ProcessingException {
-    setServiceTunnel(new ClientHttpServiceTunnel());
 
     //pre-load all known code types
     CODES.getAllCodeTypes("org.eclipsescout.demo.bahbah.shared");

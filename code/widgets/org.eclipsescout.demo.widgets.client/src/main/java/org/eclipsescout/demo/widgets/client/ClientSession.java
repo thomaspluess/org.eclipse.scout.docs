@@ -12,7 +12,6 @@ package org.eclipsescout.demo.widgets.client;
 
 import java.util.Locale;
 
-import org.eclipse.scout.commons.ConfigUtility;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
@@ -30,7 +29,6 @@ public class ClientSession extends AbstractClientSession {
   private static IScoutLogger logger = ScoutLogManager.getLogger(ClientSession.class);
 
   private String m_product;
-  private boolean m_footless;
 
   public ClientSession() {
     super(true);
@@ -45,7 +43,6 @@ public class ClientSession extends AbstractClientSession {
 
   @Override
   protected void execLoadSession() throws ProcessingException {
-    m_footless = !ConfigUtility.getPropertyBoolean("server.available", true);
     Boolean createTunnelToServerBeans = CONFIG.getPropertyValue(CreateTunnelToServerBeansProperty.class);
     if (!createTunnelToServerBeans) {
       logger.info("starting client without a server!");
@@ -56,7 +53,7 @@ public class ClientSession extends AbstractClientSession {
     setLocale(Locale.ENGLISH);
 
     setDesktop(new Desktop());
-    if (!createTunnelToServerBeans) {
+    if (createTunnelToServerBeans) {
       BEANS.get(IBookmarkService.class).loadBookmarks();
       BEANS.get(IPingService.class).ping("ping");
     }
