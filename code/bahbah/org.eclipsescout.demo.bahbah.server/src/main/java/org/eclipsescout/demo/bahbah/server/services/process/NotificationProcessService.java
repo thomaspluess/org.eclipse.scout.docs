@@ -20,7 +20,7 @@ import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
 import org.eclipse.scout.rt.server.services.common.clientnotification.AllUserFilter;
 import org.eclipse.scout.rt.server.services.common.clientnotification.IClientNotificationService;
-import org.eclipse.scout.rt.server.services.common.clientnotification.SingleUserFilter;
+import org.eclipse.scout.rt.server.services.common.notification.NotificationRegistry;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipsescout.demo.bahbah.server.ServerSession;
@@ -63,8 +63,9 @@ public class NotificationProcessService extends AbstractService implements INoti
     }
 
     // process message
-    IClientNotificationService service = BEANS.get(IClientNotificationService.class);
-    service.putNotification(new MessageNotification(ServerSession.get().getUserId(), message), new SingleUserFilter(buddyName, TIMEOUT));
+    BEANS.get(NotificationRegistry.class).putForUser(buddyName, new MessageNotification(ServerSession.get().getUserId(), message));
+//    IClientNotificationService service = BEANS.get(IClientNotificationService.class);
+//    service.putNotification(new MessageNotification(ServerSession.get().getUserId(), message), new SingleUserFilter(buddyName, TIMEOUT));
   }
 
   @Override
