@@ -14,7 +14,7 @@ import java.util.Date;
 
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
-import org.eclipse.scout.rt.client.services.common.notification.INotificationHandler;
+import org.eclipse.scout.rt.shared.notification.INotificationHandler;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.Desktop;
 import org.eclipsescout.demo.bahbah.client.ui.desktop.outlines.pages.UserNodePage;
 import org.eclipsescout.demo.bahbah.client.ui.forms.ChatForm;
@@ -35,7 +35,7 @@ public class MessageNotificationHandler implements INotificationHandler<MessageN
       try {
         ChatForm form = userPage.getChatForm(buddy);
         if (form != null) {
-          form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage(), notification.getOriginalServerNode(), notification.getProvidingServerNode());
+          form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
         }
       }
       catch (Throwable t) {

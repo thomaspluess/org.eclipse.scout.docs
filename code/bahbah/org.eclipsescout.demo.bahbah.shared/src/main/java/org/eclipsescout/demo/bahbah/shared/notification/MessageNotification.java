@@ -10,10 +10,9 @@
  ******************************************************************************/
 package org.eclipsescout.demo.bahbah.shared.notification;
 
-import org.eclipse.scout.rt.shared.services.common.clientnotification.AbstractClientNotification;
-import org.eclipse.scout.rt.shared.services.common.clientnotification.IClientNotification;
+import java.io.Serializable;
 
-public class MessageNotification extends AbstractClientNotification {
+public class MessageNotification implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -25,16 +24,6 @@ public class MessageNotification extends AbstractClientNotification {
     m_sender = senderName;
     m_message = message;
     m_originalServerNode = originalServerNode;
-  }
-
-  @Override
-  public String getOriginalServerNode() {
-    return super.getOriginalServerNode();
-  }
-
-  @Override
-  public boolean coalesce(IClientNotification existingNotification) {
-    return false;
   }
 
   public String getMessage() {
