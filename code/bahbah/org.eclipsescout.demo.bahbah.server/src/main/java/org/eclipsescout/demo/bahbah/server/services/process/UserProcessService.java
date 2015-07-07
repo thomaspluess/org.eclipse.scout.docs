@@ -22,7 +22,7 @@ import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
-import org.eclipse.scout.rt.server.clientnotification.NotificationRegistry;
+import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
@@ -71,7 +71,7 @@ public class UserProcessService extends AbstractService implements IUserProcessS
 
     m_users.remove(ServerSession.get().getUserId());
 
-    BEANS.get(NotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
+    BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
     // TODO jgu cluster notification
 //    BEANS.get(IClusterSynchronizationService.class).publishNotification(new UnregisterUserNotification(ServerSession.get().getUserId()));
 
@@ -149,12 +149,12 @@ public class UserProcessService extends AbstractService implements IUserProcessS
   @Override
   public void registerUserInternal(String userId) throws ProcessingException {
     m_users.add(userId);
-    BEANS.get(NotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
+    BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
   }
 
   @Override
   public void unregisterUserInternal(String userName) throws ProcessingException {
     m_users.remove(ServerSession.get().getUserId());
-    BEANS.get(NotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
+    BEANS.get(ClientNotificationRegistry.class).putForAllSessions(new RefreshBuddiesNotification());
   }
 }

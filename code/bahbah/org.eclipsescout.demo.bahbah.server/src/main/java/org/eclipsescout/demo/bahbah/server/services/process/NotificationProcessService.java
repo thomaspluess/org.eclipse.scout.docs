@@ -18,7 +18,7 @@ import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.service.AbstractService;
 import org.eclipse.scout.rt.server.Server;
-import org.eclipse.scout.rt.server.clientnotification.NotificationRegistry;
+import org.eclipse.scout.rt.server.clientnotification.ClientNotificationRegistry;
 import org.eclipse.scout.rt.server.services.common.clustersync.IClusterSynchronizationService;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
@@ -56,7 +56,7 @@ public class NotificationProcessService extends AbstractService implements INoti
       nodeId = s.getNodeId();
     }
 
-    BEANS.get(NotificationRegistry.class).putForUser(buddyName, new MessageNotification(ServerSession.get().getUserId(), message, nodeId));
+    BEANS.get(ClientNotificationRegistry.class).putForUser(buddyName, new MessageNotification(ServerSession.get().getUserId(), message, nodeId));
   }
 
 }
