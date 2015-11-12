@@ -41,7 +41,6 @@ import org.eclipse.scout.contacts.client.template.AbstractEmailField;
 import org.eclipse.scout.contacts.client.template.AbstractPhoneField;
 import org.eclipse.scout.contacts.client.template.AbstractPictureBox;
 import org.eclipse.scout.contacts.shared.organization.OrganizationLookupCall;
-import org.eclipse.scout.contacts.shared.person.GenderCodeType;
 import org.eclipse.scout.contacts.shared.person.IPersonService;
 import org.eclipse.scout.contacts.shared.person.PersonFormData;
 import org.eclipse.scout.contacts.shared.person.PersonUpdatePermission;
@@ -49,6 +48,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
@@ -57,7 +57,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 @FormData(value = PersonFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
@@ -220,14 +219,44 @@ public class PersonForm extends AbstractForm {
       @Order(5_000.0)
       public class GenderGroup extends AbstractRadioButtonGroup<String> {
 
-        @Override
-        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
-          return GenderCodeType.class;
-        }
+// TODO: see https://www.eclipse.org/forums/index.php?t=msg&th=1072072&goto=1714368&#msg_1714368
+//        @Override
+//        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
+//          return GenderCodeType.class;
+//        }
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Gender");
+        }
+
+// Adding the Buttons instead of using the GenderCodeType is a workaround.
+        @Order(1000.0)
+        public class MaleButton extends AbstractRadioButton<String> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Male");
+          }
+
+          @Override
+          public String getRadioValue() {
+            return org.eclipse.scout.contacts.shared.person.GenderCodeType.MaleCode.ID;
+          }
+        }
+
+        @Order(2000.0)
+        public class FemaleButton extends AbstractRadioButton<String> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Female");
+          }
+
+          @Override
+          public String getRadioValue() {
+            return org.eclipse.scout.contacts.shared.person.GenderCodeType.FemaleCode.ID;
+          }
         }
       }
     }
