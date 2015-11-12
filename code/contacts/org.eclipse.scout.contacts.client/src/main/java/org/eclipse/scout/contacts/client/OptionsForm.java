@@ -16,10 +16,10 @@ import org.eclipse.scout.contacts.client.OptionsForm.MainBox.GroupBox.ThemeRadio
 import org.eclipse.scout.contacts.shared.UiThemeCodeType;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.radiobuttongroup.AbstractRadioButtonGroup;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 
 public class OptionsForm extends AbstractForm {
 
@@ -55,14 +55,58 @@ public class OptionsForm extends AbstractForm {
           return TEXTS.get("UiTheme");
         }
 
-        @Override
-        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
-          return UiThemeCodeType.class;
-        }
+// TODO: same problem as: https://www.eclipse.org/forums/index.php?t=msg&th=1072072&goto=1714368&#msg_1714368
+//        @Override
+//        protected Class<? extends ICodeType<?, String>> getConfiguredCodeType() {
+//          return UiThemeCodeType.class;
+//        }
 
         @Override
         protected int getConfiguredGridH() {
           return 2;
+        }
+
+// Adding the Buttons instead of using the GenderCodeType is a workaround.
+        @Order(10.0)
+        public class DefaultButton extends AbstractRadioButton<String> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Default");
+          }
+
+          @Override
+          public String getRadioValue() {
+            return org.eclipse.scout.contacts.shared.UiThemeCodeType.DefaultCode.ID;
+          }
+        }
+
+        @Order(20.0)
+        public class RayoButton extends AbstractRadioButton<String> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Rayo");
+          }
+
+          @Override
+          public String getRadioValue() {
+            return org.eclipse.scout.contacts.shared.UiThemeCodeType.RayoCode.ID;
+          }
+        }
+
+        @Order(30.0)
+        public class DarkButton extends AbstractRadioButton<String> {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Dark");
+          }
+
+          @Override
+          public String getRadioValue() {
+            return org.eclipse.scout.contacts.shared.UiThemeCodeType.DarkCode.ID;
+          }
         }
       }
     }
