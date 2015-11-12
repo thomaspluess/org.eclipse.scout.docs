@@ -63,7 +63,7 @@ public class OptionsForm extends AbstractForm {
 
         @Override
         protected int getConfiguredGridH() {
-          return 2;
+          return 1;
         }
 
 // Adding the Buttons instead of using the GenderCodeType is a workaround.
