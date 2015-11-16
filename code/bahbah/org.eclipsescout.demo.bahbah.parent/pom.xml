@@ -34,7 +34,7 @@
   </modules>
 
   <properties>
-    <scout.version>5.2.0-SNAPSHOT</scout.version>
+    <scout.version>5.2.0.M3</scout.version>
   </properties>
 
   <dependencyManagement>
